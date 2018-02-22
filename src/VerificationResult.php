@@ -2,8 +2,6 @@
 
 namespace Brainfab\EmailVerify;
 
-use JMS\Serializer\Annotation as JMS;
-
 /**
  * Class VerificationResult.
  */
@@ -12,7 +10,6 @@ class VerificationResult
     /**
      * The email address to be verified.
      *
-     * @JMS\Type("string")
      * @var string
      */
     protected $email;
@@ -20,7 +17,6 @@ class VerificationResult
     /**
      * Lets you know if there are any syntax errors in the email address.
      *
-     * @JMS\Type("boolean")
      * @var bool
      */
     protected $formatCheck = false;
@@ -29,7 +25,6 @@ class VerificationResult
      * Check if the email address exists and can receive emails using SMTP connection
      * and email-sending emulation techniques.
      *
-     * @JMS\Type("boolean")
      * @var bool
      */
     protected $smtpCheck = false;
@@ -37,7 +32,6 @@ class VerificationResult
     /**
      * Ensures that the domain in the email address, eg: gmail.com, is a valid domain.
      *
-     * @JMS\Type("boolean")
      * @var bool
      */
     protected $dnsCheck = false;
@@ -45,7 +39,6 @@ class VerificationResult
     /**
      * Check to see if the email address is from a free email provider like Gmail or not.
      *
-     * @JMS\Type("boolean")
      * @var bool
      */
     protected $freeCheck = false;
@@ -53,7 +46,6 @@ class VerificationResult
     /**
      * Tells you whether or not the email address is disposable (created via a service like Mailinator).
      *
-     * @JMS\Type("boolean")
      * @var bool
      */
     protected $disposableCheck = false;
@@ -64,7 +56,6 @@ class VerificationResult
      * This is common in businesses where if you send an email to test@hi.com and another email to test2@hi.com,
      * both of those emails will go into the same inbox.
      *
-     * @JMS\Type("boolean")
      * @var bool
      */
     protected $catchAllCheck = false;
@@ -72,7 +63,6 @@ class VerificationResult
     /**
      * Mail servers list.
      *
-     * @JMS\Type("array<string>")
      * @var array
      */
     protected $mxRecords = [];

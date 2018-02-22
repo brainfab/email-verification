@@ -3,7 +3,6 @@
 namespace Brainfab\EmailVerify;
 
 use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -38,34 +37,6 @@ class HttpClient
     {
         $configs = array_merge($configs, ['debug' => false]);
         $this->client = new Client($configs);
-
-        $this->serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-
-        \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace(
-            'JMS\Serializer\Annotation',
-            __DIR__.'/../../../jms/serializer/src'
-        );
-    }
-
-    /**
-     * @param ResponseInterface $response
-     * @param string            $type DTO class name.
-     *
-     * @return mixed
-     */
-    public function decodeResponse(ResponseInterface $response, $type)
-    {
-        return $this->serializer->deserialize($response->getBody()->getContents(), $type, 'json');
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return string
-     */
-    public function encodeRequestData($data)
-    {
-        return $this->serializer->serialize($data, 'json');
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Brainfab\EmailVerify\Provider;
 use Brainfab\EmailVerify\HttpClient;
 use Brainfab\EmailVerify\VerificationResult;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 class WhoisxmlapiProvider implements ProviderInterface
 {
@@ -46,6 +47,36 @@ class WhoisxmlapiProvider implements ProviderInterface
             ]
         ]);
 
-        return $this->httpClient->decodeResponse($res, VerificationResult::class);
+        return $this->createVerificationResult($res);
+    }
+
+    /**
+     * @param ResponseInterface $res
+     *
+     * @return VerificationResult
+     */
+    protected function createVerificationResult(ResponseInterface $res)
+    {
+        $data = json_decode($res->getBody()->getContents(), true);
+        $result = new VerificationResult();
+
+        $result->setEmail($data['emailAddress']);
+        foreach ($data as $key => $value) {
+            $method = 'set'.ucfirst($key);
+            if (method_exists($result, $method)) {
+
+                if ($value === 'true') {
+                    $value = true;
+                } elseif ($value === 'false') {
+                    $value = false;
+                } else {
+                    $value = null;
+                }
+
+                call_user_func([$result, $method], $value);
+            }
+        }
+
+        return $result;
     }
 }
