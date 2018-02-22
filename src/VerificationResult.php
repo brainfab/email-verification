@@ -190,7 +190,7 @@ class VerificationResult
     /**
      * @param array $mxRecords
      */
-    public function setMxRecords(array $mxRecords)
+    public function setMxRecords(array $mxRecords = null)
     {
         $this->mxRecords = $mxRecords;
     }
