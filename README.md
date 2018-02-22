@@ -1,4 +1,4 @@
-[ViRocket](http://virocket.com) API PHP SDK - Unofficial
+Email Verification
 ========================================================
 
 Installation
@@ -6,43 +6,37 @@ Installation
 
 Require this package with composer:
 
-`` composer require brainfab/virocket_php_sdk ``
+`` composer require brainfab/email-verification ``
 
 Usage example:
 --------------
 
 ```php
+<?php
+
 require_once 'vendor/autoload.php';
 
 session_start();
 
-use Brainfab\ViRocket\ViRocket;
+use Brainfab\EmailVerify\EmailVerify;
+use Brainfab\EmailVerify\Provider\WhoisxmlapiProvider;
 
-$OAUTH2_CLIENT_ID = 'your client id';
-$OAUTH2_CLIENT_SECRET = 'your client secret';
+$apiKey = '';//your whoisxmlapi.com API key
+$email = 'support@whoisxmlapi.com';//The email address to be verified.
 
-$client = new ViRocket();
-$client->setClientId($OAUTH2_CLIENT_ID);
-$client->setClientSecret($OAUTH2_CLIENT_SECRET);
+$provider = new WhoisxmlapiProvider($apiKey);//create provider instance
+$emailVerify = new EmailVerify($provider);
 
-if (empty($_SESSION['_token'])) {
-    $client->authenticate([
-        'grant_type' => 'password',
-        'username'   => 'your email',
-        'password'   => 'your password',
-    ]);
+$result = $emailVerify->verify($email);
 
-    $_SESSION['_token'] = $client->getAccessToken();
-}
-
-if (isset($_SESSION['_token'])) {
-    $client->setAccessToken($_SESSION['_token']);
-}
-
-$videos = $client->videos->listVideos();
-
-foreach ($videos as $video) {
-    echo $video->name . "<br>";
-}
-
+var_dump(
+    $result->getEmail(),
+    $result->getFormatCheck(),
+    $result->getSmtpCheck(),
+    $result->getDnsCheck(),
+    $result->getFreeCheck(),
+    $result->getDisposableCheck(),
+    $result->getCatchAllCheck(),
+    $result->getMxRecords()
+);
 ```
