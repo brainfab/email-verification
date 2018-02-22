@@ -69,7 +69,7 @@ class WhoisxmlapiProvider implements ProviderInterface
                     $value = true;
                 } elseif ($value === 'false') {
                     $value = false;
-                } else {
+                } elseif ($value === 'null') {
                     $value = null;
                 }
 
