@@ -38,3 +38,7 @@ var_dump(
     $result->getMxRecords()
 );
 ```
+List of available providers:
+----------------------------
+- [whoisxmlapi.com](https://emailverification.whoisxmlapi.com) - `Brainfab\EmailVerify\Provider\WhoisxmlapiProvider`
+- [hunter.io](https://hunter.io/) - `Brainfab\EmailVerify\Provider\HunterProvider`
