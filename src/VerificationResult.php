@@ -19,7 +19,7 @@ class VerificationResult
      *
      * @var bool
      */
-    protected $formatCheck = false;
+    protected $formatCheck;
 
     /**
      * Check if the email address exists and can receive emails using SMTP connection
@@ -27,28 +27,28 @@ class VerificationResult
      *
      * @var bool
      */
-    protected $smtpCheck = false;
+    protected $smtpCheck;
 
     /**
      * Ensures that the domain in the email address, eg: gmail.com, is a valid domain.
      *
      * @var bool
      */
-    protected $dnsCheck = false;
+    protected $dnsCheck;
 
     /**
      * Check to see if the email address is from a free email provider like Gmail or not.
      *
      * @var bool
      */
-    protected $freeCheck = false;
+    protected $freeCheck;
 
     /**
      * Tells you whether or not the email address is disposable (created via a service like Mailinator).
      *
      * @var bool
      */
-    protected $disposableCheck = false;
+    protected $disposableCheck;
 
     /**
      * Tells you whether or not this email address is a “catch-all” address.
@@ -58,14 +58,14 @@ class VerificationResult
      *
      * @var bool
      */
-    protected $catchAllCheck = false;
+    protected $catchAllCheck;
 
     /**
      * Mail servers list.
      *
      * @var array
      */
-    protected $mxRecords = [];
+    protected $mxRecords;
 
     /**
      * @return string
