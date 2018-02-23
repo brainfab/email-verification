@@ -2,8 +2,6 @@
 
 require_once 'vendor/autoload.php';
 
-session_start();
-
 use Brainfab\EmailVerify\EmailVerify;
 use Brainfab\EmailVerify\Provider\WhoisxmlapiProvider;
 
